@@ -16,8 +16,8 @@ jobs:
       postgres:
         image: postgres:16.4
         env:
-          POSTGRES_PASSWORD: '#FuckYourMum2020'
-          POSTGRES_USER: Richard
+          POSTGRES_USER: richard
+          POSTGRES_PASSWORD: "#FuckYourMum2020"
           POSTGRES_DB: customer
         ports:
           - 5332:5432
