@@ -56,7 +56,7 @@ jobs:
         run: |
           echo "Dockerrun.aws.json before updating tag"
           cat Dockerrun.aws.json
-          sed -i -E 's_(rsmithuchot1/amigoscode-api:)([^"]*)_\1'${{steps.buildnumber.outpus.BUILD_NUMBER}}'_' Dockerrn.aws.json
+          sed -i -E 's_(rsmithuchot1/amigoscode-api:)([^"]*)_\1'${{steps.buildnumber.outpus.BUILD_NUMBER}}'_' Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat Dockerrun.aws.json
 
