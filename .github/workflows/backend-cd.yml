@@ -73,8 +73,6 @@ jobs:
           deployment_package: ./backend/Dockerrun.aws.json
 
       - name: Commit and push Dockerrun.aws.json
-        env:
-          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}  # Use your PAT
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
