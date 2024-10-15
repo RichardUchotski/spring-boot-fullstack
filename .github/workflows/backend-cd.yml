@@ -36,7 +36,7 @@ jobs:
 
       - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"test":"Hello, World!"}' https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Testing Testing, World!"}' https://hooks.slack.com/services/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
 
       - uses: actions/setup-java@v3
         with:
