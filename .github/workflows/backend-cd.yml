@@ -34,9 +34,10 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: testing slack
+      - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Just checked out the code!"}' 
+          https://hooks.slack.com/services/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
 
       - uses: actions/setup-java@v3
         with:
