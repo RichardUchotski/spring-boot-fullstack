@@ -31,11 +31,12 @@ jobs:
         working-directory: ./backend
 
     steps:
-      - name: testing slack
-        run: >-
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
 
       - uses: actions/checkout@v3
+
+      - name: testing slack
+        run: >
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
 
       - uses: actions/setup-java@v3
         with:
