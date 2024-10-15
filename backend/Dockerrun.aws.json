@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "amigoscode-api",
-      "image": "rsmithuchot1/amigoscode-rsu-api:15.10.2024.11.01.04",
+      "image": "rsmithuchot1/amigoscode-rsu-api:15.10.2024.11.04.13",
       "essential": true,
       "memory": 512,
       "portMappings": [
