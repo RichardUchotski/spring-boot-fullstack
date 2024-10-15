@@ -10,6 +10,6 @@ public class PingPongController {
 
     @GetMapping
     public PingPong getPingPong() {
-        return new PingPong("PongPongPangPangPingPingPongPingPangPangPongPing");
+        return new PingPong("PongPongPangPangPingPangPingPongPingPangPangPongPing");
     }
 }
