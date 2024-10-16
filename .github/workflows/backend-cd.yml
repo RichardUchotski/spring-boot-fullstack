@@ -36,7 +36,7 @@ jobs:
 
       - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Test, World!"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":":meow_party: :github-actions: "}' ${{secrets.ACTIONS_WEBHOOK}}
 
       - uses: actions/setup-java@v3
         with:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Built the project on the CD!"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Built the project on the CD! :maven:"}' ${{secrets.ACTIONS_WEBHOOK}}
         
 
       - name: Update Dockerrun.aws.json api image tag with new build number
@@ -72,7 +72,7 @@ jobs:
 
       - name:
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text", "Updated the build number on the docker run file"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text", "Updated the build number on the docker run file :docker:"}' ${{secrets.ACTIONS_WEBHOOK}}
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v22
@@ -88,7 +88,7 @@ jobs:
 
       - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployed to Elastic Bean Stalk"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployed to Elastic Bean Stalk :aws:"}' ${{secrets.ACTIONS_WEBHOOK}}
 
       - name: Commit and push Dockerrun.aws.json
         run: |
@@ -104,4 +104,4 @@ jobs:
 #          git push --verbose https://x-access-token:${{ env.GH_ACCESS_TOKEN }}@github.com/RichardUchotski/spring-boot-fullstack.git HEAD:main
       - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Pushing the build number as a final committ"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Pushing the build number as a final committ :github:"}' ${{secrets.ACTIONS_WEBHOOK}}
