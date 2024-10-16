@@ -57,6 +57,11 @@ jobs:
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
 
+      - name: Built the project with maven
+        run: >
+          curl -X POST -H 'Content-type: application/json' --data '{"text", "Completed the build"}' ${{secrets.ACTIONS_WEBHOOK}}
+        
+
       - name: Update Dockerrun.aws.json api image tag with new build number
         run: |
           echo "Dockerrun.aws.json before updating tag"
@@ -64,6 +69,10 @@ jobs:
           sed -i -E 's_(rsmithuchot1/amigoscode-rsu-api:)([^"]*)_\1'${{steps.build-number.outputs.BUILD_NUMBER}}'_' Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat Dockerrun.aws.json
+
+      - name:
+        run: >
+          curl -X POST -H 'Content-type: application/json' --data '{"text", "Updated the build number on the docker run file"}' ${{secrets.ACTIONS_WEBHOOK}}
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v22
@@ -76,6 +85,10 @@ jobs:
           version_description: ${{ github.SHA }}
           region: ${{ secrets.EB_REGION }}
           deployment_package: ./backend/Dockerrun.aws.json
+
+      - name: Slack Message
+        run: >
+          curl -X POST -H 'Content-type: application/json' --data '{"text", "Deployed to AWS Elastic Bean Stalk"}' ${{secrets.ACTIONS_WEBHOOk}}
 
       - name: Commit and push Dockerrun.aws.json
         run: |
