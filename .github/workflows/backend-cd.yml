@@ -57,9 +57,9 @@ jobs:
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
 
-      - name: Built the project with maven
+      - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text", "Completed the build"}' ${{secrets.ACTIONS_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Built the project on the CD!"}' ${{secrets.ACTIONS_WEBHOOK}}
         
 
       - name: Update Dockerrun.aws.json api image tag with new build number
@@ -86,9 +86,9 @@ jobs:
           region: ${{ secrets.EB_REGION }}
           deployment_package: ./backend/Dockerrun.aws.json
 
-      - name: Slack Message
+      - name: Sending slack message
         run: >
-          curl -X POST -H 'Content-type: application/json' --data '{"text", "Deployed to AWS Elastic Bean Stalk"}' ${{secrets.ACTIONS_WEBHOOk}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployed to Elastic Bean Stalk"}' ${{secrets.ACTIONS_WEBHOOK}}
 
       - name: Commit and push Dockerrun.aws.json
         run: |
@@ -102,3 +102,6 @@ jobs:
 #          git add .
 #          git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
 #          git push --verbose https://x-access-token:${{ env.GH_ACCESS_TOKEN }}@github.com/RichardUchotski/spring-boot-fullstack.git HEAD:main
+      - name: Sending slack message
+        run: >
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Pushing the build number as a final committ"}' ${{secrets.ACTIONS_WEBHOOK}}
