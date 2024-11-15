@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.amigoscodersuapi.customer.Customer;
 import org.amigoscodersuapi.customer.CustomerRepository;
+import org.amigoscodersuapi.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,12 +25,14 @@ public class AmigoscodeRsuApiApplication {
 			var faker = new Faker();
 			Random random = new Random();
 			Name name = faker.name();
+			String gender = faker.demographic().sex();
 			String firstName = name.firstName();
 			String lastName = name.lastName();
 			Customer customer = new Customer(
 					firstName +  " " + lastName,
 					firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com",
-					random.nextInt(16, 99)
+					random.nextInt(16, 99),
+					Gender.fromString(gender)
 			);
 			customerRepository.save(customer);
 		};

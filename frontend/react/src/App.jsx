@@ -3,6 +3,7 @@ import SidebarWithHeader from "./components/shared/Sidebar.jsx";
 import {useEffect, useState} from 'react';
 import {getCustomers} from "./services/client.js";
 import CardWithImage from "./components/Card.jsx";
+import {getRandomUsers} from "./services/getRandomCustomers.js";
 
 const App = () => {
 
@@ -20,6 +21,8 @@ const App = () => {
         })
 
     }, []);
+
+
 
     if (loading) {
         return (<SidebarWithHeader>
