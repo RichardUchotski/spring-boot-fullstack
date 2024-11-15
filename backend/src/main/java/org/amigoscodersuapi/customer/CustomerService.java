@@ -90,10 +90,7 @@ public class CustomerService {
 
             if(!customer.getGender().equals(newGender)) {
                 customer.setGender(newGender);
-            } else {
-                throw new DuplicateResourceException("Gender already in place");
             }
-
         }
 
         if (!changes) {

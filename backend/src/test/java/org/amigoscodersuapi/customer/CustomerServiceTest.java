@@ -159,7 +159,7 @@ class CustomerServiceTest {
         String newEmail = "alexandro@amigoscode.com";
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                "Alexandro", newEmail, 23, "male");
+                "Alexandro", newEmail, 23, "female");
 
         when(customerDao.existsCustomerWithEmail(newEmail)).thenReturn(false);
 
