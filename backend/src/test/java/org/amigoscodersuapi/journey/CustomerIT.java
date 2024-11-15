@@ -6,6 +6,7 @@ import com.github.javafaker.Name;
 import org.amigoscodersuapi.customer.Customer;
 import org.amigoscodersuapi.customer.CustomerRegistrationRequest;
 import org.amigoscodersuapi.customer.CustomerUpdateRequest;
+import org.amigoscodersuapi.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,10 +39,11 @@ public class CustomerIT {
 
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@amigoscode.com";
+        String gender = faker.demographic().sex();
         int age = RANDOM.nextInt(1, 100);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
         // send a post request
         webTestClient.post()
@@ -67,13 +69,14 @@ public class CustomerIT {
 
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, email, age
+                name, email, age, Gender.fromString(gender)
         );
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expectedCustomer);
 
+        assert allCustomers != null;
         int id = allCustomers.stream()
                 .filter(customer -> customer.getEmail().equals(email))
                 .map(Customer::getId)
@@ -102,10 +105,11 @@ public class CustomerIT {
 
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@amigoscode.com";
+        String gender = faker.demographic().sex();
         int age = RANDOM.nextInt(1, 100);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -131,6 +135,7 @@ public class CustomerIT {
                 .getResponseBody();
 
 
+        assert allCustomers != null;
         int id = allCustomers.stream()
                 .filter(customer -> customer.getEmail().equals(email))
                 .map(Customer::getId)
@@ -163,10 +168,11 @@ public class CustomerIT {
 
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@amigoscode.com";
+        String gender = faker.demographic().sex();
         int age = RANDOM.nextInt(1, 100);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -192,6 +198,7 @@ public class CustomerIT {
                 .getResponseBody();
 
 
+        assert allCustomers != null;
         int id = allCustomers.stream()
                 .filter(customer -> customer.getEmail().equals(email))
                 .map(Customer::getId)
@@ -203,7 +210,7 @@ public class CustomerIT {
         String newName = "Ali";
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                newName, null, null
+                newName, null, null, null
         );
 
         webTestClient.put()
@@ -227,7 +234,7 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expected = new Customer(
-                id, newName, email, age
+                id, newName, email, age, Gender.fromString(gender)
         );
 
         assertThat(updatedCustomer).isEqualTo(expected);

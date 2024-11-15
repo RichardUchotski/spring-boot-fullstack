@@ -18,7 +18,8 @@ public class CustomerListAccessService implements CustomerDAO {
                 1,
                 "Alex",
                 "alex@gmail.com",
-                21
+                21,
+                Gender.MALE
         );
         customers.add(alex);
 
@@ -26,7 +27,8 @@ public class CustomerListAccessService implements CustomerDAO {
                 2,
                 "Jamila",
                 "jamila@gmail.com",
-                19
+                19,
+                Gender.FEMALE
         );
         customers.add(jamila);
     }

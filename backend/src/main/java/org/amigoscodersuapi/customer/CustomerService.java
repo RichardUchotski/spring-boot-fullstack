@@ -41,7 +41,8 @@ public class CustomerService {
         Customer customer = new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
-                customerRegistrationRequest.age()
+                customerRegistrationRequest.age(),
+                Gender.fromString(customerRegistrationRequest.gender())
         );
 
         customerDao.insertCustomer(customer);
@@ -82,6 +83,17 @@ public class CustomerService {
             }
             customer.setEmail(updateRequest.email());
             changes = true;
+        }
+
+        if (updateRequest.gender() != null) {
+            Gender newGender = Gender.fromString(updateRequest.gender());
+
+            if(!customer.getGender().equals(newGender)) {
+                customer.setGender(newGender);
+            } else {
+                throw new DuplicateResourceException("Gender already in place");
+            }
+
         }
 
         if (!changes) {
